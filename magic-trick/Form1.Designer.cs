@@ -1,4 +1,4 @@
-﻿namespace magic_trick
+﻿namespace MagicTrick
 {
     partial class Form1
     {

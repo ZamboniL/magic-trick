@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace magic_trick
+namespace MagicTrick
 {
     internal static class Program
     {
