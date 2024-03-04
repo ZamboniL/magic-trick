@@ -27,6 +27,7 @@
             </summary>
             <param name="nome">Nome da partida (deve ser único)</param>
             <param name="senha">Senha da partida (até 10 caracteres)</param>
+            <param name="grupo">Nome do grupo</param>
             <returns>Id da partida criada</returns>
         </member>
         <member name="M:MagicTrickServer.Jogo.ListarJogadores(System.Int32)">
