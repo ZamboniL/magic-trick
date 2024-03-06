@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MagicTrickServer;
+using System;
 using System.Windows.Forms;
-using MagicTrickServer;
 
 namespace MagicTrick
 {
@@ -17,13 +10,13 @@ namespace MagicTrick
         {
             InitializeComponent();
             lblVersion.Text = "Versão: " + Jogo.Versao;
-            this.UpdateMatchList();
+            UpdateMatchList();
         }
 
         private void UpdateMatchList()
         {
             string matchesString = Jogo.ListarPartidas("T");
-            this.AddStringToList(lstMatchList, matchesString);
+            AddStringToList(lstMatchList, matchesString);
         }
 
         private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,12 +26,14 @@ namespace MagicTrick
             int matchId = Convert.ToInt32(matchData[0]);
 
             string playersString = Jogo.ListarJogadores(matchId);
-            this.AddStringToList(lstPlayerList, playersString);
+            AddStringToList(lstPlayerList, playersString);
         }
 
-        private void AddStringToList(ListBox lst,  string str)
+        private void AddStringToList(ListBox lst, string str)
         {
-            if(str.Length == 0)
+            lst.Items.Clear();
+
+            if (str.Length == 0)
             {
                 return;
             }
@@ -47,7 +42,6 @@ namespace MagicTrick
             str = str.Substring(0, str.Length - 1);
             string[] list = str.Split('\n');
 
-            lst.Items.Clear();
 
             for (int i = 0; i < list.Length; i++)
             {
@@ -60,20 +54,22 @@ namespace MagicTrick
             string name = txtMatchName.Text;
             string password = txtMatchPassword.Text;
 
-            if(name == "" || password == "")
+            if (name == "" || password == "")
             {
                 MessageBox.Show("Para criar uma partida você deve preencher os campos de nome e senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             string result = Jogo.CriarPartida(name, password, "Amsterdã");
+            txtMatchName.Text = "";
+            txtMatchPassword.Text = "";
 
-            if(result.StartsWith("ERRO:"))
+            if (result.StartsWith("ERRO:"))
             {
-                this.ShowError(result);
+                ShowError(result);
             }
 
-            this.UpdateMatchList();
+            UpdateMatchList();
         }
 
         private void ShowError(string message)
