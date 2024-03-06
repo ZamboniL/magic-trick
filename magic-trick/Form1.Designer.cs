@@ -61,7 +61,7 @@
             this.btnCreateMatch.TabIndex = 1;
             this.btnCreateMatch.Text = "Criar partida";
             this.btnCreateMatch.UseVisualStyleBackColor = true;
-            this.btnCreateMatch.Click += new System.EventHandler(this.btnCreateMatch_Click);
+            this.btnCreateMatch.Click += new System.EventHandler(this.BtnCreateMatch_Click);
             // 
             // txtMatchName
             // 
@@ -109,7 +109,7 @@
             this.lstMatchList.Name = "lstMatchList";
             this.lstMatchList.Size = new System.Drawing.Size(289, 264);
             this.lstMatchList.TabIndex = 6;
-            this.lstMatchList.SelectedIndexChanged += new System.EventHandler(this.lstMatchList_SelectedIndexChanged);
+            this.lstMatchList.SelectedIndexChanged += new System.EventHandler(this.LstMatchList_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -167,7 +167,7 @@
             this.Controls.Add(this.lblVersion);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MagicTrick";
             this.ResumeLayout(false);
             this.PerformLayout();
 
