@@ -17,26 +17,26 @@ namespace MagicTrick
         {
             InitializeComponent();
             lblVersion.Text = "Versão: " + Jogo.Versao;
-            this.updateMatchList();
+            this.UpdateMatchList();
         }
 
-        private void updateMatchList()
+        private void UpdateMatchList()
         {
             var matchesString = Jogo.ListarPartidas("T");
-            this.addStringToList(lstMatchList, matchesString);
+            this.AddStringToList(lstMatchList, matchesString);
         }
 
-        private void lstMatchList_SelectedIndexChanged(object sender, EventArgs e)
+        private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedMatch = lstMatchList.SelectedItem.ToString();
             var matchData = selectedMatch.Split(',');
             int matchId = Convert.ToInt32(matchData[0]);
 
             var playersString = Jogo.ListarJogadores(matchId);
-            this.addStringToList(lstPlayerList, playersString);
+            this.AddStringToList(lstPlayerList, playersString);
         }
 
-        private void addStringToList(ListBox lst,  string str)
+        private void AddStringToList(ListBox lst,  string str)
         {
             if(str.Length == 0)
             {
@@ -55,14 +55,32 @@ namespace MagicTrick
             }
         }
 
-        private void btnCreateMatch_Click(object sender, EventArgs e)
+        private void BtnCreateMatch_Click(object sender, EventArgs e)
         {
             var name = txtMatchName.Text;
             var password = txtMatchPassword.Text;
 
-            Jogo.CriarPartida(name, password, "Amsterdã");
+            if(name == "" || password == "")
+            {
+                MessageBox.Show("Para criar uma partida você deve preencher os campos de nome e senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            this.updateMatchList();
+            var result = Jogo.CriarPartida(name, password, "Amsterdã");
+
+            if(result.StartsWith("ERRO:"))
+            {
+                this.ShowError(result);
+            }
+
+            this.UpdateMatchList();
+        }
+
+        private void ShowError(string message)
+        {
+             var errorMessage = message.Split(':')[1];
+
+            MessageBox.Show(errorMessage, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
