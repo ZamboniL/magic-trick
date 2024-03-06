@@ -143,11 +143,11 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(451, 9);
+            this.label5.Location = new System.Drawing.Point(31, 428);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(328, 13);
+            this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Beatriz Adeodato, Julia Almeida Leite, Lucas Zamboni, Maria Coelho";
+            this.label5.Text = "Amsterdã";
             // 
             // Form1
             // 
