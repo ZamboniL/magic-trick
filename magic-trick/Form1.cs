@@ -1,5 +1,6 @@
 ﻿using MagicTrickServer;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MagicTrick
@@ -13,6 +14,78 @@ namespace MagicTrick
             UpdateMatchList();
         }
 
+        private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePlayerList();
+        }
+
+        private void BtnCreateMatch_Click(object sender, EventArgs e)
+        {
+            string name = txtMatchName.Text;
+            string password = txtMatchPassword.Text;
+            string result = Jogo.CriarPartida(name, password, "Amsterdã");
+
+            if (IsError(result))
+            {
+                ShowError(result);
+            }
+
+            UpdateMatchList();
+        }
+
+        private void btnEnterMatch_Click(object sender, EventArgs e)
+        {
+            string selectedMatch = lstMatchList.SelectedItem.ToString();
+            string[] matchData = selectedMatch.Split(',');
+            int matchId = Convert.ToInt32(matchData[0]);
+
+            string playerName = txtPlayerName.Text;
+            string matchPassword = txtMatchPassword.Text;
+            string result = Jogo.EntrarPartida(matchId, playerName, matchPassword);
+
+            if (IsError(result))
+            {
+                ShowError(result);
+                return;
+            }
+
+            string[] data = result.Split(',');
+            txtPlayerId.Text = data[0];
+            txtPlayerPassword.Text = data[1];
+
+            UpdatePlayerList();
+        }
+
+        private void btnStartMatch_Click(object sender, EventArgs e)
+        {
+            int playerId = Convert.ToInt32(txtPlayerId.Text);
+            string playerPassword = txtPlayerPassword.Text;
+            string result = Jogo.IniciarPartida(playerId, playerPassword);
+
+            if (IsError(result))
+            {
+                ShowError(result);
+                return;
+            }
+
+            string selectedMatch = lstMatchList.SelectedItem.ToString();
+            string[] matchData = selectedMatch.Split(',');
+            int matchId = Convert.ToInt32(matchData[0]);
+
+            string res = Jogo.ListarJogadores(matchId);
+            string[] players = SplitResultString(res);
+            string firstPlayer = "";
+            for(int i = 0; i < players.Length; i++)
+            {
+                if (players[i].Contains(result))
+                {
+                    firstPlayer = players[i];
+                }
+            }
+
+            txtFirstPlayer.Text = firstPlayer;
+        }
+
         // Atualiza o componente de lista de partidas com as partidas atuais
         private void UpdateMatchList()
         {
@@ -20,9 +93,16 @@ namespace MagicTrick
             AddStringToList(lstMatchList, matchesString);
         }
 
-        private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
+        // Atualiza o componente de lista de jogadores com os jogadores da partida selecionada
+        private void UpdatePlayerList()
         {
             string selectedMatch = lstMatchList.SelectedItem.ToString();
+
+            if (selectedMatch == "")
+            {
+                return;
+            }
+
             string[] matchData = selectedMatch.Split(',');
             int matchId = Convert.ToInt32(matchData[0]);
 
@@ -40,10 +120,7 @@ namespace MagicTrick
                 return;
             }
 
-            str.Replace("\r", "");
-            str = str.Substring(0, str.Length - 1);
-            string[] list = str.Split('\n');
-
+            string[] list = SplitResultString(str);
 
             for (int i = 0; i < list.Length; i++)
             {
@@ -51,80 +128,25 @@ namespace MagicTrick
             }
         }
 
-        private void BtnCreateMatch_Click(object sender, EventArgs e)
+        private string[] SplitResultString(string str)
         {
-            string name = txtMatchName.Text;
-            string password = txtMatchPassword.Text;
-
-            if (name == "" || password == "")
-            {
-                MessageBox.Show("Para criar uma partida você deve preencher os campos de nome e senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string result = Jogo.CriarPartida(name, password, "Amsterdã");
-            txtMatchName.Text = "";
-            txtMatchPassword.Text = "";
-
-            if (IsError(result))
-            {
-                ShowError(result);
-            }
-
-            UpdateMatchList();
+            str.Replace("\r", "");
+            str = str.Substring(0, str.Length - 1);
+            return str.Split('\n');
         }
 
+        // Retorna se o resultado de uma chamada é um erro
         private bool IsError(string str)
         {
             return str.StartsWith("ERRO:");
         }
 
+        // Abre uma caixa com a mensagem de erro
         private void ShowError(string message)
         {
             string errorMessage = message.Split(':')[1];
 
             MessageBox.Show(errorMessage, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void btnEnterMatch_Click(object sender, EventArgs e)
-        {
-            string selectedMatch = lstMatchList.SelectedItem.ToString();
-            string[] matchData = selectedMatch.Split(',');
-            int matchId = Convert.ToInt32(matchData[0]);
-            string playerName = txtPlayerName.Text;
-            string matchPassword = txtMatchPassword.Text;
-            string result = Jogo.EntrarPartida(matchId, playerName, matchPassword);
-
-            if (IsError(result))
-            {
-                ShowError(result);
-                return;
-            }
-
-            string[] data = result.Split(',');
-            txtPlayerId.Text = data[0];
-            txtPlayerPassword.Text = data[1];
-            
-        }
-
-        private void txtPlayerName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnStartMatch_Click(object sender, EventArgs e)
-        {
-            int playerId = Convert.ToInt32(txtPlayerId.Text);
-            string matchPassword = txtPlayerPassword.Text;
-            string result = Jogo.IniciarPartida(playerId, matchPassword);
-
-            if(IsError(result))
-            {
-                ShowError(result);
-                return;
-            }
-
-            txtFirstPlayer.Text = result;
         }
     }
 }
