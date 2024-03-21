@@ -84,6 +84,8 @@ namespace MagicTrick
             }
 
             txtFirstPlayer.Text = primeiroJogador;
+            MatchForm formulario = new MatchForm(idPartida);
+            formulario.Show();
         }
 
         // Atualiza o componente de lista de partidas com as partidas atuais
