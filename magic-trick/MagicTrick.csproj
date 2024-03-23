@@ -70,6 +70,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GerenciadorDeRespostas.cs" />
+    <Compile Include="Jogador.cs" />
     <Compile Include="MatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
