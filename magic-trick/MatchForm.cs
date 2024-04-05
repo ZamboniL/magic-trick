@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagicTrickServer;
 
@@ -13,79 +8,129 @@ namespace MagicTrick
 {
     public partial class MatchForm : Form
     {
-        public Jogador Jogador { get; set; }
-        public Jogador Oponente {  get; set; }
+        private int IdPartida {  get; set; }
+        public List<Jogador> Jogadores { get; set; }
 
-        public MatchForm(int idPartida, Jogador jogador, Jogador oponente)
+        public MatchForm(int idPartida, List<Jogador> jogadores)
         {
             InitializeComponent();
-            this.Jogador = jogador;
-            this.Oponente = oponente;
 
-            lblJogador.Text = jogador.Nome;
-            lblOponente.Text = oponente.Nome;
+            IdPartida = idPartida;
+            Jogadores = jogadores;
 
-            string resultado = Jogo.ConsultarMao(idPartida);
-            string[] maos = GerenciadorDeRespostas.SepararStringDeResposta(resultado);
-            string primeiraCarta = maos[0];
-            string primeiroId = primeiraCarta.Split(',')[0];
-            for(int i=0; i< maos.Length; i++)
+            List<Carta> cartas = Carta.ListarCartas(idPartida);
+            
+            foreach(Jogador jogador in jogadores)
             {
-                string carta = maos[i];
-                if (carta.Contains(primeiroId))
+                jogador.AdicionarMao(cartas);
+            }
+
+            MostrarMaos();
+            AtualizarTurno();
+        }
+
+        private void AtualizarTurno()
+        {
+            string resultado = Jogo.VerificarVez(IdPartida);
+            string[] vezDados = resultado.Split(',');
+            Jogador jogadorAtual = Jogadores.Find(j => j.Id == Convert.ToInt32(vezDados[1]));
+            Console.WriteLine(resultado);
+
+            lblTurno.Text = $"Turno: {jogadorAtual.Nome}";
+        }
+
+        private void MostrarMaos()
+        {
+            for (int i = 0; i < Jogadores.Count; i++)
+            {
+                Jogador jogador = Jogadores[i];
+                if (i < 2)
                 {
-                    lstCartas1.Items.Add(carta);
-                }
-                else
+                    MostrarMaoHorizontal(jogador.Mao, i, jogador.Nome);
+                } else
                 {
-                    lstCartas2.Items.Add(carta);
+                    MostrarMaoVertical(jogador.Mao, i, jogador.Nome);
                 }
             }
         }
 
-        private void btnJogarCarta_Click(object sender, EventArgs e)
+        private void MostrarMaoHorizontal(List<Carta> mao, int indexJogador, string nomeJogador)
         {
-            string cartaSelecionada = lstCartas1.SelectedItem?.ToString();
+            int metade = mao.Count / 2;
+            int espacamento = 8;
 
-            if(cartaSelecionada == null)
+            int inicioTopo = indexJogador == 0 ? 20 : this.Height - ((Carta.Height * 3) + 8);
+            int inicioEsquerda = (this.Width / 2) - ((Carta.Width * metade) + (espacamento * (metade - 1))) / 2;
+
+            Label lblNome = new Label();
+            lblNome.Text = nomeJogador;
+            lblNome.Top = indexJogador == 0 ? inicioTopo + (Carta.Height * 2) + espacamento + 20 : inicioTopo - 20 - espacamento;
+            lblNome.Left = inicioEsquerda;
+            lblNome.AutoSize = true;
+            this.Controls.Add(lblNome);
+            
+            for (int i = 0; i < mao.Count; i++)
             {
-                GerenciadorDeRespostas.MostrarErro("ERRO: Nenhuma carta foi selecionada.");
-                return;
+                Carta carta = mao[i];
+
+                int posicao = carta.Posicao % metade;
+                int topo = i < metade ? inicioTopo : (inicioTopo + Carta.Height + espacamento);
+                int esquerda = inicioEsquerda + (posicao * Carta.Width) + (posicao * espacamento);
+                AdicionarCartaMesa(topo, esquerda, carta);
             }
+        }
 
-            string resultado = Jogador.JogarCarta(cartaSelecionada);
+        private void MostrarMaoVertical(List<Carta> mao, int indexJogador, string nomeJogador)
+        {
+            int metade = mao.Count / 2;
+            int espacamento = 8;
 
-            if(GerenciadorDeRespostas.PossuiErro(resultado))
+            int inicioEsquerda = indexJogador == 0 ? 20 : this.Width - ((Carta.Width * 3) + 8);
+            int inicioTopo = (this.Height / 2) - ((Carta.Height * metade) + (espacamento * (metade - 1))) / 2;
+
+            Label lblNome = new Label();
+            lblNome.Text = nomeJogador;
+            lblNome.Top = inicioTopo;
+            lblNome.Left = indexJogador == 0 ? inicioEsquerda + (Carta.Width * 2) + espacamento + 20 : inicioEsquerda - 40 - espacamento;
+            lblNome.AutoSize = true;
+            this.Controls.Add(lblNome);
+
+            for (int i = 0; i < mao.Count; i++)
             {
-                GerenciadorDeRespostas.MostrarErro(resultado);
-                return;
-            }
+                Carta carta = mao[i];
+                int posicao = carta.Posicao % metade;
+                int topo = inicioTopo + (posicao * Carta.Height) + (posicao * espacamento);
+                int esquerda = i < metade ? inicioEsquerda : (inicioEsquerda + Carta.Width + espacamento);
 
-            txtCartaJogada.Text = resultado;
+                AdicionarCartaMesa(topo, esquerda, carta);
+            }
+        }
+
+        private void AdicionarCartaMesa(int topo, int esquerda, Carta carta)
+        {
+            Panel pnlCarta = new Panel();
+
+            pnlCarta.BackgroundImage = carta.Imagem;
+            pnlCarta.Left = esquerda;
+            pnlCarta.Top = topo;
+            pnlCarta.Height = Carta.Height;
+            pnlCarta.Width = Carta.Width;
+
+            pnlCarta.BackColor = Color.Transparent;
+            pnlCarta.BackgroundImageLayout = ImageLayout.Stretch;
+
+            this.Controls.Add(pnlCarta);
+            carta.Panel = pnlCarta;
+        }
+
+        private void btnJogar_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnApostar_Click(object sender, EventArgs e)
         {
-            int aposta;
 
-            try
-            {
-                aposta = Convert.ToInt32(txtAposta.Text);
-
-            } catch {
-                GerenciadorDeRespostas.MostrarErro("ERRO: Valor de aposta tem que ser um número");
-                return;
-            }
-
-            string resultado = Jogador.Apostar(aposta);
-
-            if (GerenciadorDeRespostas.PossuiErro(resultado))
-            {
-                GerenciadorDeRespostas.MostrarErro(resultado);
-                return;
-            }
-
-            txtCartaApostada.Text = resultado;
         }
     }
 }

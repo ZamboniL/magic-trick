@@ -29,7 +29,7 @@ namespace MagicTrick
 
         public static string[] SepararStringDeResposta(string str)
         {
-            str.Replace("\r", "");
+            str = str.Replace("\r", "");
             str = str.Substring(0, str.Length - 1);
             return str.Split('\n');
         }

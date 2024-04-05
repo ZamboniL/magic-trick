@@ -1,5 +1,6 @@
 ﻿using MagicTrickServer;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,6 +13,13 @@ namespace MagicTrick
             InitializeComponent();
             lblVersion.Text = "Versão: " + Jogo.Versao;
             AtualizarListaDePartidas();
+
+            int idPartida = Convert.ToInt32(2021);
+
+            List<Jogador> jogadores = Jogador.ListarJogadores(idPartida);
+
+            MatchForm formulario = new MatchForm(idPartida, jogadores);
+            formulario.Show();
         }
 
         private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,38 +94,9 @@ namespace MagicTrick
             string[] dadosPartida = partidaSelecionada.Split(',');
             int idPartida = Convert.ToInt32(dadosPartida[0]);
 
-            string resultadorListarJogadores = Jogo.ListarJogadores(idPartida);
-            string[] jogadores = GerenciadorDeRespostas.SepararStringDeResposta(resultadorListarJogadores);
-            string primeiroJogador = "";
-            string segundoJogador = "";
+            List<Jogador> jogadores = Jogador.ListarJogadores(idPartida);
 
-            for (int i = 0; i < jogadores.Length; i++)
-            {
-                if (jogadores[i].Contains(resultadoIniciarPartida))
-                {
-                    primeiroJogador = jogadores[i];
-                } else
-                {
-                    segundoJogador = jogadores[i];
-                }
-            }
-
-            string[] dadosPrimeiroJogador = primeiroJogador.Split(',');
-            Jogador jogador = new Jogador(
-                dadosPrimeiroJogador[1],
-                Convert.ToInt32(dadosPrimeiroJogador[0]),
-                txtPlayerPassword.Text
-                );
-            string[] dadosOponente = segundoJogador.Split(',');
-            Jogador oponente = new Jogador(
-                dadosOponente[1],
-                Convert.ToInt32(dadosOponente[0])
-                );
-
-            txtPrimeiroId.Text = jogador.Id.ToString();
-            txtPrimeiroNome.Text = jogador.Nome;
-
-            MatchForm formulario = new MatchForm(idPartida, jogador, oponente);
+            MatchForm formulario = new MatchForm(idPartida, jogadores);
             formulario.Show();
         }
 
@@ -143,6 +122,14 @@ namespace MagicTrick
 
             string jogadores = Jogo.ListarJogadores(idPartida);
             GerenciadorDeRespostas.AdicionarStringALista(lstPlayerList, jogadores);
+        }
+
+        private void btnEscolherPartida_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmPartidas frm = new frmPartidas();
+            frm.ShowDialog();
+            this.Show();
         }
     }
 }
