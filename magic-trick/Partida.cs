@@ -9,16 +9,23 @@ namespace MagicTrick
 {
     public class Partida
     {
-        private int _id;
+        public int Id { get; set; }
         public string Nome { get; set; }
-        public DateTime data { get; set; }
-        public char status { get; set; }
+        public DateTime Data { get; set; }
+        public char Status { get; set; }
 
-        public Partida(int id, string Nome, DateTime data, char status) { 
-            this._id = id;
-            this.Nome = Nome;
-            this.data = data;
-            this.status = status;
+        public Partida(int id, string nome, DateTime data, char status) {
+            this.Id = id;
+            this.Nome = nome;
+            this.Data = data;
+            this.Status = status;
+        }
+
+        public static Partida InterpretarRetornoApi(string partida)
+        {
+            string[] dados = partida.Split(',');
+
+            return new Partida(Convert.ToInt32(dados[0]), dados[1], Convert.ToDateTime(dados[2]), Convert.ToChar(dados[3]));
         }
 
         public static List<Partida> ListarPartidas() {
@@ -29,13 +36,7 @@ namespace MagicTrick
 
             for (int i = 0; i < partidas.Length; i++)
             {
-                string[] dadosPartida = partidas[i].Split(',');
-                listaPartidas.Add(new Partida(
-                    Convert.ToInt32(dadosPartida[0]),
-                    dadosPartida[1],
-                    Convert.ToDateTime(dadosPartida[2]),
-                    Convert.ToChar(dadosPartida[3])
-                ));
+                listaPartidas.Add(InterpretarRetornoApi(partidas[i]));
             }
 
             return listaPartidas;

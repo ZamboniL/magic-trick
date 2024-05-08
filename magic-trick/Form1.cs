@@ -8,23 +8,42 @@ namespace MagicTrick
 {
     public partial class Form1 : Form
     {
+        Partida PartidaSelecionada;
+        Jogador JogadorSelecionado;
         public Form1()
         {
             InitializeComponent();
+
             lblVersion.Text = "Versão: " + Jogo.Versao;
+
             AtualizarListaDePartidas();
-
-            int idPartida = Convert.ToInt32(2021);
-
-            List<Jogador> jogadores = Jogador.ListarJogadores(idPartida);
-
-            MatchForm formulario = new MatchForm(idPartida, jogadores);
-            formulario.Show();
         }
 
         private void LstMatchList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string partidaSelecionada = lstMatchList.SelectedItem?.ToString();
+            PartidaSelecionada = Partida.InterpretarRetornoApi(partidaSelecionada);
+
+            if(PartidaSelecionada.Status == 'A')
+            {
+                btnStartMatch.Text = "Iniciar partida";
+            } else
+            {
+                btnStartMatch.Text = "Abrir partida";
+            }
+
             AtualizarListaDeJogadores();
+        }
+        private void LstPlayerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string jogadorSelecionado = lstPlayerList.SelectedItem?.ToString();
+            if(jogadorSelecionado == null)
+            {
+                return;
+            }
+            JogadorSelecionado = Jogador.InterpretarRetornoApi(jogadorSelecionado, PartidaSelecionada.Id);
+            txtPlayerId.Text = JogadorSelecionado.Id.ToString();
+            txtPlayerName.Text = JogadorSelecionado.Nome;
         }
 
         private void BtnCreateMatch_Click(object sender, EventArgs e)
@@ -41,22 +60,17 @@ namespace MagicTrick
             AtualizarListaDePartidas();
         }
 
-        private void btnEnterMatch_Click(object sender, EventArgs e)
+        private void BtnEnterMatch_Click(object sender, EventArgs e)
         {
-            string partidaSelecionada = lstMatchList.SelectedItem?.ToString();
-
-            if (partidaSelecionada == null)
+            if (PartidaSelecionada == null)
             {
                 GerenciadorDeRespostas.MostrarErro("ERRO: Uma partida tem que estar selecionada.");
                 return;
             }
 
-            string[] dadosPartida = partidaSelecionada.Split(',');
-            int idPartida = Convert.ToInt32(dadosPartida[0]);
-
             string nomeJogador = txtPlayerName.Text;
             string senhaPartida = txtMatchPassword.Text;
-            string resultado = Jogo.EntrarPartida(idPartida, nomeJogador, senhaPartida);
+            string resultado = Jogo.EntrarPartida(PartidaSelecionada.Id, nomeJogador, senhaPartida);
 
             if (GerenciadorDeRespostas.PossuiErro(resultado))
             {
@@ -71,10 +85,37 @@ namespace MagicTrick
             AtualizarListaDeJogadores();
         }
 
-        private void btnStartMatch_Click(object sender, EventArgs e)
+        private void BtnStartMatch_Click(object sender, EventArgs e)
         {
+
+            if(txtPlayerId.Text == "" || txtPlayerId.Text == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Selecione um jogador Primeiro");
+                return;
+            
+            }
+
+            if (txtPlayerPassword.Text == "" || txtPlayerPassword.Text == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Preencha a senha do seu jogador primeiro");
+                return;
+            }
+
             int idJogador = Convert.ToInt32(txtPlayerId.Text);
             string senhaJogador = txtPlayerPassword.Text;
+
+            if (PartidaSelecionada == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Partida a ser iniciada não foi selecionada");
+                return;
+            }
+
+            if(PartidaSelecionada.Status != 'A')
+            {
+                AbraPartida(idJogador, senhaJogador);
+                return;
+            }
+
             string resultadoIniciarPartida = Jogo.IniciarPartida(idJogador, senhaJogador);
 
             if (GerenciadorDeRespostas.PossuiErro(resultadoIniciarPartida))
@@ -83,20 +124,17 @@ namespace MagicTrick
                 return;
             }
 
-            string partidaSelecionada = lstMatchList.SelectedItem?.ToString();
 
-            if (partidaSelecionada == null)
-            {
-                GerenciadorDeRespostas.MostrarErro("ERRO: Partida a ser iniciada não foi selecionada");
-                return;
-            }
 
-            string[] dadosPartida = partidaSelecionada.Split(',');
-            int idPartida = Convert.ToInt32(dadosPartida[0]);
+            AbraPartida(idJogador, senhaJogador);
+        }
 
-            List<Jogador> jogadores = Jogador.ListarJogadores(idPartida);
-
-            MatchForm formulario = new MatchForm(idPartida, jogadores);
+        private void AbraPartida(int idJogador, string senhaJogador)
+        {
+            List<Jogador> jogadores = Jogador.ListarJogadores(PartidaSelecionada.Id);
+            int indexJogador = jogadores.FindIndex(j => j.Id == idJogador);
+            jogadores[indexJogador].Senha = senhaJogador;
+            MatchForm formulario = new MatchForm(PartidaSelecionada.Id, idJogador, jogadores);
             formulario.Show();
         }
 
@@ -110,17 +148,12 @@ namespace MagicTrick
         // Atualiza o componente de lista de jogadores com os jogadores da partida selecionada
         private void AtualizarListaDeJogadores()
         {
-            string partidaSelecionada = lstMatchList.SelectedItem?.ToString();
-
-            if (partidaSelecionada == "" || partidaSelecionada == null)
+            if (PartidaSelecionada == null)
             {
                 return;
             }
 
-            string[] dadosPartida = partidaSelecionada.Split(',');
-            int idPartida = Convert.ToInt32(dadosPartida[0]);
-
-            string jogadores = Jogo.ListarJogadores(idPartida);
+            string jogadores = Jogo.ListarJogadores(PartidaSelecionada.Id);
             GerenciadorDeRespostas.AdicionarStringALista(lstPlayerList, jogadores);
         }
 
@@ -130,6 +163,34 @@ namespace MagicTrick
             frmPartidas frm = new frmPartidas();
             frm.ShowDialog();
             this.Show();
+        }
+
+        private void BtnAbrirPartida_Click(object sender, EventArgs e)
+        {
+
+            if (txtPlayerId.Text == "" || txtPlayerId.Text == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Selecione um jogador Primeiro");
+                return;
+
+            }
+
+            if (txtPlayerPassword.Text == "" || txtPlayerPassword.Text == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Preencha a senha do seu jogador primeiro");
+                return;
+            }
+
+            int idJogador = Convert.ToInt32(txtPlayerId.Text);
+            string senhaJogador = txtPlayerPassword.Text;
+
+            if (PartidaSelecionada == null)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Partida a ser iniciada não foi selecionada");
+                return;
+            }
+            
+            AbraPartida(idJogador, senhaJogador);
         }
     }
 }

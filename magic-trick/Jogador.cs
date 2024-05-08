@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MagicTrick
 {
@@ -13,15 +14,29 @@ namespace MagicTrick
         public string Nome { get; set; }
         public int Id { get; set; }
         public string Senha { get; set; }
-        public List<Carta> Mao { get; set; }
-        public Carta Aposta { get; set; }
+        public List<Carta> Mao { get; set; } = new List<Carta>();
+        public int Aposta { get; set; } = 0;
+        public int Vitorias { get; set; } = 0;
+        public Label Label {  get; set; } = new Label();
 
         public Jogador(string Nome, int Id, int idPartida, string Senha = null) {
             this.Nome = Nome;
             this.Id = Id;
             this.Senha = Senha;
             this._IdPartida = idPartida;
-            this.Mao = new List<Carta>();
+            Label.Text = $"{Nome} - {Aposta}/{Vitorias}";
+            Label.AutoSize = true;
+        }
+
+        public static Jogador InterpretarRetornoApi(string jogador, int idPartida)
+        {
+            string[] dados = jogador.Split(',');
+
+            return new Jogador(
+                dados[1],
+                Convert.ToInt32(dados[0]),
+                idPartida
+            );
         }
 
         public static List<Jogador> ListarJogadores(int idPartida)
@@ -33,13 +48,7 @@ namespace MagicTrick
 
             for (int i = 0; i < jogadores.Length; i++)
             {
-                string[] dadosJogador = jogadores[i].Split(',');
-
-                listaJogadores.Add(new Jogador(
-                   dadosJogador[1],
-                   Convert.ToInt32(dadosJogador[0]),
-                   idPartida
-                ));
+                listaJogadores.Add(InterpretarRetornoApi(jogadores[i], idPartida));
             }
 
             return listaJogadores;
@@ -57,17 +66,40 @@ namespace MagicTrick
             }
         }
 
-        public string JogarCarta(string carta)
+        public void AtualizarLabel()
         {
-            int comecoPosicao = 9;
-            int finalPosicao = carta.IndexOf(",");
-            int posicao = Convert.ToInt32(carta.Substring(comecoPosicao, finalPosicao - comecoPosicao));
-            return Jogo.Jogar(Id, Senha, posicao);
+            Label.Text = $"{Nome} - {Aposta}/{Vitorias}";
         }
 
-        public string Apostar(int aposta)
+        public int Jogar(int posicao)
         {
-            return Jogo.Apostar(Id, Senha, aposta);
+            string resultado = Jogo.Jogar(Id, Senha, posicao);
+
+            if (GerenciadorDeRespostas.PossuiErro(resultado))
+            {
+                GerenciadorDeRespostas.MostrarErro(resultado);
+                return -1;
+            }
+
+            int valor = Convert.ToInt32(resultado);
+
+            return valor;
+        }
+
+        public int Apostar(int posicao)
+        {
+            string resultado = Jogo.Apostar(Id, Senha, posicao);
+
+            if (GerenciadorDeRespostas.PossuiErro(resultado))
+            {
+                GerenciadorDeRespostas.MostrarErro(resultado);
+                return -1;
+            }
+
+            Aposta = Convert.ToInt32(resultado);
+            AtualizarLabel();
+
+            return Aposta;
         }
     }
 }

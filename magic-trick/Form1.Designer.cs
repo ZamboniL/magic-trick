@@ -49,6 +49,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAbrirPartida = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -150,6 +151,7 @@
             this.lstPlayerList.Name = "lstPlayerList";
             this.lstPlayerList.Size = new System.Drawing.Size(293, 264);
             this.lstPlayerList.TabIndex = 8;
+            this.lstPlayerList.SelectedIndexChanged += new System.EventHandler(this.LstPlayerList_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -169,7 +171,7 @@
             this.btnEnterMatch.TabIndex = 11;
             this.btnEnterMatch.Text = "Entrar na partida";
             this.btnEnterMatch.UseVisualStyleBackColor = true;
-            this.btnEnterMatch.Click += new System.EventHandler(this.btnEnterMatch_Click);
+            this.btnEnterMatch.Click += new System.EventHandler(this.BtnEnterMatch_Click);
             // 
             // txtPlayerName
             // 
@@ -200,7 +202,7 @@
             this.btnStartMatch.TabIndex = 15;
             this.btnStartMatch.Text = "Iniciar partida";
             this.btnStartMatch.UseVisualStyleBackColor = true;
-            this.btnStartMatch.Click += new System.EventHandler(this.btnStartMatch_Click);
+            this.btnStartMatch.Click += new System.EventHandler(this.BtnStartMatch_Click);
             // 
             // groupBox1
             // 
@@ -264,11 +266,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Partida";
             // 
+            // btnAbrirPartida
+            // 
+            this.btnAbrirPartida.Location = new System.Drawing.Point(554, 62);
+            this.btnAbrirPartida.Name = "btnAbrirPartida";
+            this.btnAbrirPartida.Size = new System.Drawing.Size(127, 23);
+            this.btnAbrirPartida.TabIndex = 18;
+            this.btnAbrirPartida.Text = "Abrir partida";
+            this.btnAbrirPartida.UseVisualStyleBackColor = true;
+            this.btnAbrirPartida.Click += new System.EventHandler(this.BtnAbrirPartida_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAbrirPartida);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnStartMatch);
@@ -315,6 +328,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnAbrirPartida;
     }
 }
 
