@@ -92,7 +92,12 @@ namespace MagicTrick
         public static List<Carta> ListarCartas(int idPartida)
         {
             string resultado = Jogo.ConsultarMao(idPartida);
-            Console.WriteLine(resultado);
+
+            if(GerenciadorDeRespostas.PossuiErro(resultado))
+            {
+                return new List<Carta>();
+            }
+
             string[] maos = GerenciadorDeRespostas.SepararStringDeResposta(resultado);
             List<Carta> listaCartas = new List<Carta>();
 

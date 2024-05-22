@@ -66,17 +66,23 @@
   <ItemGroup>
     <Compile Include="Automato.cs" />
     <Compile Include="Carta.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmCriacaoPartida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmCriacaoPartida.Designer.cs">
+      <DependentUpon>frmCriacaoPartida.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPartidas.cs">
+    <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPartidas.Designer.cs">
-      <DependentUpon>frmPartidas.cs</DependentUpon>
+    <Compile Include="frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelecaoPartida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelecaoPartida.Designer.cs">
+      <DependentUpon>frmSelecaoPartida.cs</DependentUpon>
     </Compile>
     <Compile Include="GerenciadorDeRespostas.cs" />
     <Compile Include="Jogador.cs" />
@@ -90,11 +96,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Turno.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmCriacaoPartida.resx">
+      <DependentUpon>frmCriacaoPartida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPartidas.resx">
-      <DependentUpon>frmPartidas.cs</DependentUpon>
+    <EmbeddedResource Include="frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelecaoPartida.resx">
+      <DependentUpon>frmSelecaoPartida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MatchForm.resx">
       <DependentUpon>MatchForm.cs</DependentUpon>
@@ -109,6 +118,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Jogador.datasource" />
+    <None Include="Properties\DataSources\Partida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,6 +186,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\Copas1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\confetti.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\criar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\reload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

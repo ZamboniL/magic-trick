@@ -17,6 +17,7 @@ namespace MagicTrick
         public List<Carta> Mao { get; set; } = new List<Carta>();
         public int Aposta { get; set; } = 0;
         public int Vitorias { get; set; } = 0;
+        public int Pontuacao { get; set; } = 0;
         public Label Label {  get; set; } = new Label();
 
         public Jogador(string Nome, int Id, int idPartida, string Senha = null) {
@@ -42,6 +43,12 @@ namespace MagicTrick
         public static List<Jogador> ListarJogadores(int idPartida)
         {
             string retorno = Jogo.ListarJogadores(idPartida);
+
+            if (retorno.Length == 0)
+            {
+                return new List<Jogador>();
+            }
+
             string[] jogadores = GerenciadorDeRespostas.SepararStringDeResposta(retorno);
 
             List<Jogador> listaJogadores = new List<Jogador>();
@@ -66,8 +73,23 @@ namespace MagicTrick
             }
         }
 
-        public void AtualizarLabel()
+        public void AtualizarScore(int vitorias = -1, int pontuacao = -99, int aposta = -1)
         {
+            if(vitorias != -1)
+            {
+                Vitorias = vitorias;
+            }
+
+            if(pontuacao != -99)
+            {
+                Pontuacao = pontuacao;
+            }
+
+            if(aposta != -1)
+            {
+                Aposta = aposta;
+            }
+
             Label.Text = $"{Nome} - {Aposta}/{Vitorias}";
         }
 
@@ -77,6 +99,7 @@ namespace MagicTrick
 
             if (GerenciadorDeRespostas.PossuiErro(resultado))
             {
+
                 GerenciadorDeRespostas.MostrarErro(resultado);
                 return -1;
             }
@@ -96,8 +119,7 @@ namespace MagicTrick
                 return -1;
             }
 
-            Aposta = Convert.ToInt32(resultado);
-            AtualizarLabel();
+            AtualizarScore(aposta: Convert.ToInt32(resultado));
 
             return Aposta;
         }

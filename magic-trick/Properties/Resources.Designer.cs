@@ -63,6 +63,16 @@ namespace MagicTrick.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap confetti {
+            get {
+                object obj = ResourceManager.GetObject("confetti", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Copas1 {
             get {
                 object obj = ResourceManager.GetObject("Copas1", resourceCulture);
@@ -76,6 +86,26 @@ namespace MagicTrick.Properties {
         internal static System.Drawing.Bitmap Copas2 {
             get {
                 object obj = ResourceManager.GetObject("Copas2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap criar {
+            get {
+                object obj = ResourceManager.GetObject("criar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap entrar {
+            get {
+                object obj = ResourceManager.GetObject("entrar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,6 +173,16 @@ namespace MagicTrick.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Main {
+            get {
+                object obj = ResourceManager.GetObject("Main", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ouros1 {
             get {
                 object obj = ResourceManager.GetObject("Ouros1", resourceCulture);
@@ -176,6 +216,16 @@ namespace MagicTrick.Properties {
         internal static System.Drawing.Bitmap Paus2 {
             get {
                 object obj = ResourceManager.GetObject("Paus2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reload {
+            get {
+                object obj = ResourceManager.GetObject("reload", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
