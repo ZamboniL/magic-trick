@@ -21,9 +21,10 @@ namespace MagicTrick
 
             Id = id;
             Senha = senha;
+            Turno = new Turno(Id);
 
             CarregarJogadores();
-            CarregarTurno();
+            CarregarPartida();
         }
 
         private void CarregarJogadores()
@@ -33,20 +34,18 @@ namespace MagicTrick
             dgvJogadores.DataSource = jogadores;
         }
 
-        private void CarregarTurno()
+        private void CarregarPartida()
         {
-            Turno = new Turno(Id);
-            Turno.Atualizar();
+            AtualizarTurno();
+            InicializarRodada();
 
-            if(Turno.StatusPartida != 'A')
+            if (Turno.StatusPartida != 'A')
             {
                 btnIniciarPartida.Enabled = false;
                 btnAdicionarJogador.Enabled = false;
                 btnReload.Enabled = false;
                 btnReloadTurno.Enabled = false;
                 btnIniciarTimer.Enabled = true;
-                InicializarRodada();
-                AtualizarTurno();
             } else
             {
                 btnIniciarTimer.Enabled = false;
@@ -74,11 +73,11 @@ namespace MagicTrick
         {
             Turno.Atualizar();
 
+            if(!Turno.Mudou) { return; };
+
             lblRodada.Text = $"{Turno.Rodada}";
             lblAcao.Text = Turno.Acao == 'C' ? "Jogar" : "Apostar";
             lblTurno.Text = Jogadores.Find(j => j.Id == Turno.Jogador).Nome;
-
-            if(!Turno.Mudou) { return; };
 
             if(Turno.Resetou)
             {
@@ -283,6 +282,7 @@ namespace MagicTrick
 
             if(Robo == null)
             {
+                IdJogador = Convert.ToInt32(txtId.Text);
                 Robo = new Automato(Id, Turno.Rodada);
                 foreach (Jogador jogador in Jogadores)
                 {
@@ -309,6 +309,12 @@ namespace MagicTrick
             }
 
             Jogador jogadorAtual = Jogadores.Find(j => j.Id == IdJogador);
+
+            if(jogadorAtual.Senha == null || jogadorAtual.Senha.Length == 0)
+            {
+                jogadorAtual.Senha = txtSenha.Text;
+            }
+
             if(Turno.Acao == 'C')
             {
                 Carta jogada = Robo.EscolherCarta(jogadorAtual.Mao, jogadorAtual.Aposta, jogadorAtual.Vitorias);
@@ -324,6 +330,12 @@ namespace MagicTrick
 
         private void BtnIniciarTimer_Click(object sender, EventArgs e)
         {
+            if(txtId.Text == null || txtId.Text.Length == 0 || txtSenha.Text == null || txtSenha.Text.Length == 0)
+            {
+                GerenciadorDeRespostas.MostrarErro("ERRO: Primeiro preencha o ID e senha do jogador que será controlado pelo robo.");
+                return;
+            }
+
             if(tmrJogador.Enabled)
             {
                 tmrJogador.Enabled = false;
@@ -368,7 +380,7 @@ namespace MagicTrick
                 return;
             }
 
-            CarregarTurno();
+            CarregarPartida();
         }
 
         private void dgvJogadores_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -413,6 +425,11 @@ namespace MagicTrick
         private void btnReload_Click(object sender, EventArgs e)
         {
             CarregarJogadores();
+        }
+
+        private void btnReloadTurno_Click(object sender, EventArgs e)
+        {
+            CarregarPartida();
         }
     }
 }

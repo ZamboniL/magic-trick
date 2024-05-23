@@ -46,13 +46,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTurno = new System.Windows.Forms.Label();
-            this.lblRodada = new System.Windows.Forms.Label();
-            this.lblAcao = new System.Windows.Forms.Label();
-            this.btnReloadTurno = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnReloadTurno = new System.Windows.Forms.Button();
+            this.lblAcao = new System.Windows.Forms.Label();
+            this.lblRodada = new System.Windows.Forms.Label();
+            this.lblTurno = new System.Windows.Forms.Label();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jogadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -247,23 +247,49 @@
             this.panel2.Size = new System.Drawing.Size(1184, 64);
             this.panel2.TabIndex = 30;
             // 
-            // lblTurno
+            // label9
             // 
-            this.lblTurno.AutoSize = true;
-            this.lblTurno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTurno.Location = new System.Drawing.Point(388, 30);
-            this.lblTurno.Name = "lblTurno";
-            this.lblTurno.Size = new System.Drawing.Size(0, 25);
-            this.lblTurno.TabIndex = 0;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label9.Location = new System.Drawing.Point(389, 11);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 15);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Vez";
             // 
-            // lblRodada
+            // label8
             // 
-            this.lblRodada.AutoSize = true;
-            this.lblRodada.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRodada.Location = new System.Drawing.Point(121, 30);
-            this.lblRodada.Name = "lblRodada";
-            this.lblRodada.Size = new System.Drawing.Size(0, 25);
-            this.lblRodada.TabIndex = 1;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(122, 11);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 15);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "Rodada";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label7.Location = new System.Drawing.Point(251, 11);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 15);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Ação";
+            // 
+            // btnReloadTurno
+            // 
+            this.btnReloadTurno.BackgroundImage = global::MagicTrick.Properties.Resources.reload;
+            this.btnReloadTurno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReloadTurno.Location = new System.Drawing.Point(13, 4);
+            this.btnReloadTurno.Name = "btnReloadTurno";
+            this.btnReloadTurno.Size = new System.Drawing.Size(54, 56);
+            this.btnReloadTurno.TabIndex = 30;
+            this.btnReloadTurno.UseVisualStyleBackColor = true;
+            this.btnReloadTurno.Click += new System.EventHandler(this.btnReloadTurno_Click);
             // 
             // lblAcao
             // 
@@ -274,48 +300,23 @@
             this.lblAcao.Size = new System.Drawing.Size(0, 25);
             this.lblAcao.TabIndex = 2;
             // 
-            // btnReloadTurno
+            // lblRodada
             // 
-            this.btnReloadTurno.BackgroundImage = global::MagicTrick.Properties.Resources.reload;
-            this.btnReloadTurno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReloadTurno.Location = new System.Drawing.Point(13, 5);
-            this.btnReloadTurno.Name = "btnReloadTurno";
-            this.btnReloadTurno.Size = new System.Drawing.Size(54, 56);
-            this.btnReloadTurno.TabIndex = 30;
-            this.btnReloadTurno.UseVisualStyleBackColor = true;
+            this.lblRodada.AutoSize = true;
+            this.lblRodada.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRodada.Location = new System.Drawing.Point(121, 30);
+            this.lblRodada.Name = "lblRodada";
+            this.lblRodada.Size = new System.Drawing.Size(0, 25);
+            this.lblRodada.TabIndex = 1;
             // 
-            // label7
+            // lblTurno
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(251, 13);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 15);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "Ação";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(122, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 15);
-            this.label8.TabIndex = 32;
-            this.label8.Text = "Rodada";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label9.Location = new System.Drawing.Point(389, 13);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 15);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Vez";
+            this.lblTurno.AutoSize = true;
+            this.lblTurno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTurno.Location = new System.Drawing.Point(388, 30);
+            this.lblTurno.Name = "lblTurno";
+            this.lblTurno.Size = new System.Drawing.Size(0, 25);
+            this.lblTurno.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
             // 

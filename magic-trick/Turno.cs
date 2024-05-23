@@ -10,7 +10,7 @@ namespace MagicTrick
         private int IdPartida;
         private string Cache = "";
         public bool Mudou = false;
-        public bool Resetou = false;
+        public bool Resetou = true;
         public bool Acabou = false;
         public int Rodada { get; set; } = 1;
         public char Acao { get; set;  } = 'C';
