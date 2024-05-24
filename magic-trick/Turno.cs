@@ -70,7 +70,7 @@ namespace MagicTrick
             
             if(atualizouRodada)
             {
-                PegarUltimaCartaJogada();
+                PegarUltimasCartasJogadas();
                 Rodada = novaRodada;
             }
 
@@ -89,14 +89,17 @@ namespace MagicTrick
             }
         }
 
-        private void PegarUltimaCartaJogada()
+        private void PegarUltimasCartasJogadas()
         {
             string resultado = Jogo.ExibirJogadas2(IdPartida);
             string[] dados = GerenciadorDeRespostas.SepararStringDeResposta(resultado);
             string[] dadosRodada = dados.Where(d => d.StartsWith($"{Rodada},")).ToArray();
 
-            Carta carta = Carta.DeRodada(dadosRodada[dadosRodada.Length - 1]);
-            Jogadas.Add(carta);
+            for(int i = 0; i < dadosRodada.Length; i++)
+            {
+                Carta carta = Carta.DeRodada(dadosRodada[dadosRodada.Length - 1]);
+                Jogadas.Add(carta);
+            }
         }
     }
 }

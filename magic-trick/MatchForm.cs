@@ -63,6 +63,10 @@ namespace MagicTrick
 
             foreach (Jogador jogador in Jogadores)
             {
+                foreach (Carta carta in jogador.Mao) {
+                    Controls.Remove(carta.Panel);
+                }
+
                 jogador.AdicionarMao(cartas);
             }
 

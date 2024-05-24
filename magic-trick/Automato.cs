@@ -1,4 +1,5 @@
 ﻿using MagicTrickServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -142,21 +143,28 @@ namespace MagicTrick
             int media = 0;
             foreach(Carta carta in mao)
             {
-                int total = carta.Possibilidades.Sum();
-                int mediaLocal = total / carta.Possibilidades.Count;
-
-                media += mediaLocal;
+                media += carta.Possibilidades.Max();
             }
 
             media /= mao.Count;
 
-            if(media > 3)
+            if(media > 5)
             {
-                Carta carta = mao.Find(c => c.Possibilidades.Min() > 4);
+                Carta carta = mao.Last() as Carta;
+                escolha = carta.Posicao;
+            }
+            else if (media > 3)
+            {
+                Carta carta = mao.Find(c => c.Possibilidades.Min() > 2);
+                escolha = carta.Posicao;
+            }
+            else if (media >= 2)
+            {
+                Carta carta = mao.FindLast(c => c.Possibilidades.Max() <= 4);
                 escolha = carta.Posicao;
             } else
             {
-                Carta carta = mao.Find(c => c.Possibilidades.Max() < 4);
+                Carta carta = mao.FindLast(c => c.Possibilidades.Max() == 2 || c.Possibilidades.Max() == 1);
                 escolha = carta.Posicao;
             }
 

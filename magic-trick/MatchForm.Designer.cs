@@ -66,7 +66,7 @@
             // 
             this.gpbAposta.BackColor = System.Drawing.Color.WhiteSmoke;
             this.gpbAposta.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gpbAposta.Location = new System.Drawing.Point(551, 368);
+            this.gpbAposta.Location = new System.Drawing.Point(551, 355);
             this.gpbAposta.Name = "gpbAposta";
             this.gpbAposta.Size = new System.Drawing.Size(60, 90);
             this.gpbAposta.TabIndex = 12;
@@ -76,7 +76,7 @@
             // gpbJogada
             // 
             this.gpbJogada.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.gpbJogada.Location = new System.Drawing.Point(391, 368);
+            this.gpbJogada.Location = new System.Drawing.Point(391, 355);
             this.gpbJogada.Name = "gpbJogada";
             this.gpbJogada.Size = new System.Drawing.Size(60, 90);
             this.gpbJogada.TabIndex = 14;
@@ -92,7 +92,7 @@
             // 
             this.lblVencedor.AutoSize = true;
             this.lblVencedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVencedor.Location = new System.Drawing.Point(384, 295);
+            this.lblVencedor.Location = new System.Drawing.Point(384, 282);
             this.lblVencedor.Name = "lblVencedor";
             this.lblVencedor.Size = new System.Drawing.Size(242, 37);
             this.lblVencedor.TabIndex = 17;
@@ -340,15 +340,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.ClientSize = new System.Drawing.Size(1184, 721);
             this.Controls.Add(this.lblVencedor);
             this.Controls.Add(this.gpbJogada);
             this.Controls.Add(this.gpbAposta);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1200, 800);
-            this.MinimumSize = new System.Drawing.Size(1200, 800);
+            this.MaximumSize = new System.Drawing.Size(1200, 760);
+            this.MinimumSize = new System.Drawing.Size(1200, 760);
             this.Name = "MatchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MatchForm";
