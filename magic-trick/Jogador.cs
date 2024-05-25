@@ -61,9 +61,15 @@ namespace MagicTrick
             return listaJogadores;
         }
 
-        public void AdicionarMao(List<Carta> cartas)
+        public void Resetar()
         {
             Mao.Clear();
+            AtualizarScore(vitorias: 0, aposta: 0);
+        }
+
+        public void AdicionarMao(List<Carta> cartas)
+        {
+            Resetar();
             foreach (Carta carta in cartas)
             {
                 if(Id == carta.IdJogador)
@@ -72,6 +78,7 @@ namespace MagicTrick
                 }
             }
         }
+
 
         public void AtualizarScore(int vitorias = -1, int pontuacao = -99, int aposta = -1)
         {
