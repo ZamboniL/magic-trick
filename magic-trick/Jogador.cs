@@ -121,6 +121,7 @@ namespace MagicTrick
             {
 
                 GerenciadorDeRespostas.MostrarErro(resultado);
+                
                 return -1;
             }
 

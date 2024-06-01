@@ -10,7 +10,7 @@ namespace MagicTrick
         private int IdPartida;
         private int Rodada;
         private List<Carta> Cemiterio = new List<Carta>();
-        private Carta VencedorRodada = null;
+        private Carta AlvoADerrotar = null;
 
         public Automato(int idPartida, int rodada)
         {
@@ -19,7 +19,7 @@ namespace MagicTrick
 
             for (int i = 1; i <= rodada; i++)
             {
-                VencedorRodada = null;
+                AlvoADerrotar = null;
                 AtualizarCemiterio(i);
             }
         }
@@ -68,7 +68,7 @@ namespace MagicTrick
 
             for (int i = 0; i <= diferenca; i++)
             {
-                VencedorRodada = null;
+                AlvoADerrotar = null;
                 AtualizarCemiterio(rodada - i);
             }
             
@@ -91,11 +91,11 @@ namespace MagicTrick
             List<Carta> maoValida;
             Carta escolha;
 
-            if(VencedorRodada != null)
+            if(AlvoADerrotar != null)
             {
-                if (mao.Any(c => c.Naipe == VencedorRodada.Naipe))
+                if (mao.Any(c => c.Naipe == AlvoADerrotar.Naipe))
                 {
-                    maoValida = mao.Where(c => c.Naipe == VencedorRodada.Naipe).ToList();
+                    maoValida = mao.Where(c => c.Naipe == AlvoADerrotar.Naipe).ToList();
                 } else if (mao.Any(c => c.Naipe == 'C'))
                 {
                     maoValida = mao.Where(c => c.Naipe == 'C').ToList();
@@ -109,10 +109,10 @@ namespace MagicTrick
                     escolha = maoValida[maoValida.Count / 2];
                 } else if (aposta > pontos)
                 {
-                    escolha = TentarGanhar(maoValida, VencedorRodada);
+                    escolha = TentarGanhar(maoValida, AlvoADerrotar);
                 } else
                 {
-                    escolha = TentarPerder(maoValida, VencedorRodada);
+                    escolha = TentarPerder(maoValida, AlvoADerrotar);
                 }
             } else
             {
@@ -234,11 +234,10 @@ namespace MagicTrick
                 Console.WriteLine(desseRound);
 
                 if (desseRound && (
-                    (VencedorRodada == null) || 
-                    (VencedorRodada.Valor < carta.Valor && VencedorRodada.Naipe == carta.Naipe) || 
-                    (VencedorRodada.Naipe != 'C' && carta.Naipe == 'C')))
+                    (AlvoADerrotar == null) || 
+                    (AlvoADerrotar.Valor < carta.Valor && AlvoADerrotar.Naipe == carta.Naipe)))
                 {
-                    VencedorRodada = carta;
+                    AlvoADerrotar = carta;
                 }
 
                 if (Cemiterio.Find(c => c.Naipe == carta.Naipe && c.Valor == carta.Valor) != null)
