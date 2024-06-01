@@ -74,6 +74,7 @@ namespace MagicTrick
             
             foreach(Jogador jogador in jogadores)
             {
+                jogador.RemoverJogadas(Cemiterio);
                 DescontarPossibilidadeComCemiterio(jogador.Mao);
             }
             for (int i = 0; i < jogadores.Count; i++)
@@ -224,16 +225,18 @@ namespace MagicTrick
             }
 
             string[] cartas = GerenciadorDeRespostas.SepararStringDeResposta(resposta);
-            cartas = cartas.Where(c => c.StartsWith($"{rodada},")).ToArray();
 
             for (int i = 0; i < cartas.Length; i++)
             {
                 Carta carta = Carta.DeRodada(cartas[i]);
+                bool desseRound = cartas[i].StartsWith($"{rodada},");
+                Console.WriteLine(cartas[i]);
+                Console.WriteLine(desseRound);
 
-                if (
+                if (desseRound && (
                     (VencedorRodada == null) || 
                     (VencedorRodada.Valor < carta.Valor && VencedorRodada.Naipe == carta.Naipe) || 
-                    (VencedorRodada.Naipe != 'C' && carta.Naipe == 'C'))
+                    (VencedorRodada.Naipe != 'C' && carta.Naipe == 'C')))
                 {
                     VencedorRodada = carta;
                 }
@@ -285,7 +288,7 @@ namespace MagicTrick
                 {
                     if(c.Naipe == c2.Naipe)
                     {
-                        if (c2.Possibilidades.Count == 1)
+                        if (c2.Possibilidades.Count == 1 && c.Possibilidades.Count > 1)
                         {
                             c.Possibilidades.Remove(c2.Possibilidades.First());
                         }

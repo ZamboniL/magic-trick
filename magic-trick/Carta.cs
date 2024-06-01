@@ -17,7 +17,7 @@ namespace MagicTrick
         public Bitmap Verso { get; set; }
         public Panel Panel { get; set; } = new Panel();
         public static int Height = 60;
-        public static int Width = 45;
+        public static int Width = 40;
 
         public Carta(int idJogador, int posicao, char naipe)
         {
@@ -113,16 +113,15 @@ namespace MagicTrick
         {
             Valor = valor;
             Label lblValorCarta = new Label();
+            lblValorCarta.AutoSize = false;
+            lblValorCarta.TextAlign = ContentAlignment.MiddleCenter;
+            lblValorCarta.Dock = DockStyle.Fill;
             lblValorCarta.Text = valor.ToString();
-            lblValorCarta.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            lblValorCarta.Font = new Font("Microsoft Sans Serif", 16, FontStyle.Bold);
+            lblValorCarta.ForeColor = Color.White;
             Panel.BackgroundImage = Frente;
             Panel.Controls.Add(lblValorCarta);
             Panel.BringToFront();
-        }
-
-        public override string ToString()
-        {
-            return $"Posição: {Posicao}, Naipe: {Naipe}";
         }
 
         private void IdentifiqueImagem(char naipe)

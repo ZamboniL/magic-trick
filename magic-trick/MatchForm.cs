@@ -141,15 +141,6 @@ namespace MagicTrick
             gpbJogada.Controls.Clear();
             foreach (Carta jogada in Turno.Jogadas)
             {
-                Jogador jogador = Jogadores.Find(j => j.Id == jogada.IdJogador);
-                int cartaOriginal = jogador.Mao.FindIndex(c => c.Naipe == jogada.Naipe && c.Posicao == jogada.Posicao);
-
-                if(cartaOriginal != -1)
-                {
-                    Controls.Remove(jogador.Mao[cartaOriginal].Panel);
-                    jogador.Mao.RemoveAt(cartaOriginal);
-                }
-
                 jogada.Virar(jogada.Valor);
                 gpbJogada.Controls.Add(jogada.Panel);
                 jogada.Panel.Location = new Point(8, 20);
@@ -164,7 +155,7 @@ namespace MagicTrick
             {
                 Jogador jogador = Jogadores.Find(j => j.Id == aposta.IdJogador);
                 jogador.Aposta = aposta.Valor;
-                int cartaOriginal = jogador.Mao.FindIndex(c => c.Naipe == aposta.Naipe && c.Posicao == aposta.Posicao);
+                int cartaOriginal = jogador.Mao.FindIndex(c => c.Posicao == aposta.Posicao);
                 
                 if (cartaOriginal != -1)
                 {
@@ -349,7 +340,6 @@ namespace MagicTrick
             {
                 tmrJogador.Enabled = true;
                 btnIniciarTimer.Text = "Pausar Robo";
-
             }
         }
 

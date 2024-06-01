@@ -146,6 +146,30 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\confetti.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\entrar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\criar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Copas1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="resources\Copas2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -183,30 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\Triângulo2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\Copas1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\confetti.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\Main.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\entrar1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\entrar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\entrar2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\criar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\reload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

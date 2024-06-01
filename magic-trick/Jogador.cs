@@ -79,6 +79,19 @@ namespace MagicTrick
             }
         }
 
+        public void RemoverJogadas(List<Carta> cemiterio)
+        {
+            foreach(Carta c in cemiterio)
+            {
+                Console.WriteLine($"{c.Posicao} {c.Naipe} {c.IdJogador}");
+                Carta carta = Mao.Find(m => m.Posicao == c.Posicao && m.Naipe == c.Naipe && Id == c.IdJogador);
+                if(carta != null)
+                {
+                    Mao.Remove(carta);
+                    carta.Panel.Dispose();
+                }
+            }
+        }
 
         public void AtualizarScore(int vitorias = -1, int pontuacao = -99, int aposta = -1)
         {

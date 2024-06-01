@@ -51,11 +51,11 @@ namespace MagicTrick
             
             int novaRodada = Convert.ToInt32(turno[2]);
             bool atualizouRodada = novaRodada != Rodada;
+            Rodada = novaRodada;
 
             if(atualizouRodada && novaRodada == 1)
             {
                 Resetou = true;
-                Rodada = novaRodada;
                 return;
             } else
             {
@@ -68,12 +68,6 @@ namespace MagicTrick
                 return;
             }
             
-            if(atualizouRodada)
-            {
-                PegarUltimasCartasJogadas();
-                Rodada = novaRodada;
-            }
-
             for(int i = 1; i < dados.Length; i++)
             {
                 string dadosCarta = dados[i].Split(':')[1];
@@ -86,19 +80,6 @@ namespace MagicTrick
                     Carta carta = Carta.DeVerificarVezAposta(dadosCarta.Split(','));
                     Apostas.Add(carta);
                 }
-            }
-        }
-
-        private void PegarUltimasCartasJogadas()
-        {
-            string resultado = Jogo.ExibirJogadas2(IdPartida);
-            string[] dados = GerenciadorDeRespostas.SepararStringDeResposta(resultado);
-            string[] dadosRodada = dados.Where(d => d.StartsWith($"{Rodada},")).ToArray();
-
-            for(int i = 0; i < dadosRodada.Length; i++)
-            {
-                Carta carta = Carta.DeRodada(dadosRodada[dadosRodada.Length - 1]);
-                Jogadas.Add(carta);
             }
         }
     }
