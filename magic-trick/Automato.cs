@@ -134,7 +134,7 @@ namespace MagicTrick
 
         public int EscolherAposta(List<Carta> mao)
         {
-            if(Rodada != 3)
+            if(Rodada != 5)
             {
                 return 0;
             }
@@ -156,12 +156,12 @@ namespace MagicTrick
             }
             else if (media > 3)
             {
-                Carta carta = mao.Find(c => c.Possibilidades.Min() > 2);
+                Carta carta = mao.Find(c => c.Possibilidades.Min() > 1);
                 escolha = carta.Posicao;
             }
             else if (media >= 2)
             {
-                Carta carta = mao.FindLast(c => c.Possibilidades.Max() <= 4);
+                Carta carta = mao.FindLast(c => c.Possibilidades.Max() <= 3);
                 escolha = carta.Posicao;
             } else
             {
