@@ -72,6 +72,12 @@
     <Compile Include="frmCriacaoPartida.Designer.cs">
       <DependentUpon>frmCriacaoPartida.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSelecaoJogador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelecaoJogador.Designer.cs">
+      <DependentUpon>frmSelecaoJogador.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     <Compile Include="Turno.cs" />
     <EmbeddedResource Include="frmCriacaoPartida.resx">
       <DependentUpon>frmCriacaoPartida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelecaoJogador.resx">
+      <DependentUpon>frmSelecaoJogador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
@@ -207,6 +216,135 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\Triângulo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\iniciar-partida.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\iniciar-robo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\pausar-robo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\iniciar-partida-disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\iniciar-robo-disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\reload-.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\reload-off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\adicionar-jogador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\adicionar-jogador-disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\person-.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\person-off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Ouros-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Ouros-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Ouros-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Paus-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Paus-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Paus-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Paus-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Triângulo-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Triângulo-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Triângulo-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Triângulo-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Copas-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Copas-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Copas-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Copas-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Espadas-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Espadas-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Espadas-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Espadas-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Estrela-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Estrela-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Estrela-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Estrela-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Lua-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Lua-l-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Lua-r-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Lua-t-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Ouros-b-f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\bg-neon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\bg-board.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\bg-rain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

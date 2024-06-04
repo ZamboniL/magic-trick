@@ -53,6 +53,5 @@ namespace MagicTrick
                 txtId.Text = Convert.ToString(carregar.Id);
             }
         }
-
     }
 }

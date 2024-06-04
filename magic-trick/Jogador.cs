@@ -1,6 +1,7 @@
 ﻿using MagicTrickServer;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,33 @@ namespace MagicTrick
         public int Aposta { get; set; } = 0;
         public int Vitorias { get; set; } = 0;
         public int Pontuacao { get; set; } = 0;
-        public Label Label {  get; set; } = new Label();
+        public Label LabelNome {  get; set; } = new Label();
+        public Label LabelPontuacao {  get; set; } = new Label();
+        public Label LabelAposta {  get; set; } = new Label();
 
         public Jogador(string Nome, int Id, int idPartida, string Senha = null) {
             this.Nome = Nome;
             this.Id = Id;
             this.Senha = Senha;
             this._IdPartida = idPartida;
-            Label.Text = $"{Nome} - {Aposta}/{Vitorias}";
-            Label.AutoSize = true;
+            
+            LabelNome.Text = Nome;
+            LabelNome.AutoSize = true;
+            LabelNome.BackColor = Color.Transparent;
+            LabelNome.ForeColor = Color.White;
+            LabelNome.Font = new Font("Yu Gothic", 8, FontStyle.Bold);
+
+            LabelPontuacao.Text = $"Pontuação: {Pontuacao}";
+            LabelPontuacao.AutoSize = true;
+            LabelPontuacao.BackColor = Color.Transparent;
+            LabelPontuacao.ForeColor = Color.White;
+            LabelPontuacao.Font = new Font("Yu Gothic", 8, FontStyle.Bold);
+
+            LabelAposta.Text = $"Aposta: {Aposta} Vitorias: {Vitorias}";
+            LabelAposta.AutoSize = true;
+            LabelAposta.BackColor = Color.Transparent;
+            LabelAposta.ForeColor = Color.White;
+            LabelAposta.Font = new Font("Yu Gothic", 8, FontStyle.Bold);
         }
 
         public static Jogador InterpretarRetornoApi(string jogador, int idPartida)
@@ -67,13 +86,14 @@ namespace MagicTrick
             AtualizarScore(vitorias: 0, aposta: 0);
         }
 
-        public void AdicionarMao(List<Carta> cartas)
+        public void AdicionarMao(List<Carta> cartas, int posicao)
         {
             Resetar();
             foreach (Carta carta in cartas)
             {
                 if(Id == carta.IdJogador)
                 {
+                    carta.AdicionarOrientacao(posicao);
                     Mao.Add(carta);
                 }
             }
@@ -110,7 +130,8 @@ namespace MagicTrick
                 Aposta = aposta;
             }
 
-            Label.Text = $"{Nome} - {Aposta}/{Vitorias}";
+            LabelAposta.Text = $"Aposta: {Aposta} Vitorias: {Vitorias}";
+            LabelPontuacao.Text = $"Pontuação: {Pontuacao}";
         }
 
         public int Jogar(int posicao)

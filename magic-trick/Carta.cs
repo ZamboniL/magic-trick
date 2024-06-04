@@ -14,7 +14,10 @@ namespace MagicTrick
         public List<int> Possibilidades { get; set; } = new List<int>{ 0, 1, 2, 3, 4, 5, 6, 7 };
         public char Naipe {  get; set; }
         public Bitmap Frente { get; set; }
-        public Bitmap Verso { get; set; }
+        public Bitmap VersoTopo { get; set; }
+        public Bitmap VersoEsquerda { get; set; }
+        public Bitmap VersoDireita { get; set; }
+        public Bitmap VersoBaixo { get; set; }
         public Panel Panel { get; set; } = new Panel();
         public static int Height = 60;
         public static int Width = 40;
@@ -27,7 +30,7 @@ namespace MagicTrick
 
             IdentifiqueImagem(naipe);
             
-            Panel.BackgroundImage = Verso;
+            Panel.BackgroundImage = VersoBaixo;
             Panel.Height = Height;
             Panel.Width = Width;
 
@@ -119,9 +122,24 @@ namespace MagicTrick
             lblValorCarta.Text = valor.ToString();
             lblValorCarta.Font = new Font("Microsoft Sans Serif", 16, FontStyle.Bold);
             lblValorCarta.ForeColor = Color.White;
+            Panel.Height = Height;
+            Panel.Width = Width;
             Panel.BackgroundImage = Frente;
             Panel.Controls.Add(lblValorCarta);
             Panel.BringToFront();
+        }
+
+        public void AdicionarOrientacao(int posicaoJogador)
+        {
+            if(posicaoJogador == 0 || posicaoJogador == 1)
+            {
+                Panel.BackgroundImage = posicaoJogador == 0 ? VersoTopo : VersoBaixo;
+            } else
+            {
+                Panel.Height = Width;
+                Panel.Width = Height;
+                Panel.BackgroundImage = posicaoJogador == 2 ? VersoEsquerda : VersoDireita;
+            }
         }
 
         private void IdentifiqueImagem(char naipe)
@@ -129,31 +147,52 @@ namespace MagicTrick
             switch (naipe)
             {
                 case 'C':
-                    Verso = Properties.Resources.Copas1;
+                    VersoTopo = Properties.Resources.Copas_t_f;
+                    VersoBaixo = Properties.Resources.Copas_b_f;
+                    VersoDireita = Properties.Resources.Copas_r_f;
+                    VersoEsquerda = Properties.Resources.Copas_l_f;
                     Frente = Properties.Resources.Copas2;
                     return;
                 case 'E':
-                    Verso = Properties.Resources.Espadas1;
+                    VersoTopo = Properties.Resources.Espadas_t_f;
+                    VersoBaixo = Properties.Resources.Espadas_b_f;
+                    VersoDireita = Properties.Resources.Espadas_r_f;
+                    VersoEsquerda = Properties.Resources.Espadas_l_f;
                     Frente = Properties.Resources.Espadas2;
                     return;
                 case 'O':
-                    Verso = Properties.Resources.Ouros1;
+                    VersoTopo = Properties.Resources.Ouros_t_f;
+                    VersoBaixo = Properties.Resources.Ouros_b_f;
+                    VersoDireita = Properties.Resources.Ouros_r_f;
+                    VersoEsquerda = Properties.Resources.Ouros_l_f;
                     Frente = Properties.Resources.Ouros2;
                     return;
                 case 'P':
-                    Verso = Properties.Resources.Paus1;
+                    VersoTopo = Properties.Resources.Paus_t_f;
+                    VersoBaixo = Properties.Resources.Paus_b_f;
+                    VersoDireita = Properties.Resources.Paus_r_f;
+                    VersoEsquerda = Properties.Resources.Paus_l_f;
                     Frente = Properties.Resources.Paus2;
                     return;
                 case 'T':
-                    Verso = Properties.Resources.Triângulo1;
+                    VersoTopo = Properties.Resources.Triângulo_t_f;
+                    VersoBaixo = Properties.Resources.Triângulo_b_f;
+                    VersoDireita = Properties.Resources.Triângulo_r_f;
+                    VersoEsquerda = Properties.Resources.Triângulo_l_f;
                     Frente = Properties.Resources.Triângulo2;
                     return;
                 case 'L':
-                    Verso = Properties.Resources.Lua1;
+                    VersoTopo = Properties.Resources.Lua_t_f;
+                    VersoBaixo = Properties.Resources.Lua_b_f;
+                    VersoDireita = Properties.Resources.Lua_r_f;
+                    VersoEsquerda = Properties.Resources.Lua_l_f;
                     Frente = Properties.Resources.Lua2;
                     return;
                 default:
-                    Verso = Properties.Resources.Estrela1;
+                    VersoTopo = Properties.Resources.Estrela_t_f;
+                    VersoBaixo = Properties.Resources.Estrela_b_f;
+                    VersoDireita = Properties.Resources.Estrela_r_f;
+                    VersoEsquerda = Properties.Resources.Estrela_l_f;
                     Frente = Properties.Resources.Estrela2;
                     return;
             }

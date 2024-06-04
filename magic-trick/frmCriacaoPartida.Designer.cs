@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCriacaoPartida));
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.btnCriar = new System.Windows.Forms.Button();
@@ -88,6 +89,7 @@
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtNome);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(340, 250);
             this.MinimumSize = new System.Drawing.Size(340, 250);

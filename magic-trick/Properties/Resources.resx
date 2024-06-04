@@ -130,9 +130,6 @@
   <data name="Lua2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Lua2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="confetti" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\confetti.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Estrela1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Estrela1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -174,5 +171,119 @@
   </data>
   <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\reload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iniciar_partida" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\iniciar-partida.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iniciar_partida_disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\iniciar-partida-disabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iniciar_robo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\iniciar-robo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iniciar_robo_disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\iniciar-robo-disabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pausar_robo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pausar-robo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reload_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\reload-.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reload_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\reload-off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Copas_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Copas-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Copas_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Copas-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Copas_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Copas-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Copas_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Copas-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Espadas_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Espadas-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Espadas_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Espadas-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Espadas_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Espadas-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Espadas_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Espadas-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estrela_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Estrela-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estrela_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Estrela-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estrela_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Estrela-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estrela_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Estrela-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lua_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Lua-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lua_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Lua-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lua_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Lua-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lua_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Lua-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ouros_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Ouros-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ouros_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Ouros-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ouros_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Ouros-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ouros_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Ouros-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Paus_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Paus-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Paus_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Paus-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Paus_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Paus-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Paus_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Paus-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="person_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\person-.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="person_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\person-off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Triângulo_b_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Triângulo-b-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Triângulo_l_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Triângulo-l-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Triângulo_r_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Triângulo-r-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Triângulo_t_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Triângulo-t-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bg_neon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\bg-neon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

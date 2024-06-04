@@ -11,6 +11,8 @@ namespace MagicTrick
         private Turno Turno {  get; set; }
         private int Id {  get; set; }
         private string Senha {  get; set; }
+        private int IdJogadorControlado;
+        private string SenhaJogadorControlado;
         public int IdJogador { get; set; }
         public List<Jogador> Jogadores { get; set; }
         private Automato Robo;
@@ -31,7 +33,6 @@ namespace MagicTrick
         {
             List<Jogador> jogadores = Jogador.ListarJogadores(Id);
             Jogadores = jogadores;
-            dgvJogadores.DataSource = jogadores;
         }
 
         private void CarregarPartida()
@@ -42,17 +43,29 @@ namespace MagicTrick
             if (Turno.StatusPartida != 'A')
             {
                 btnIniciarPartida.Enabled = false;
-                btnAdicionarJogador.Enabled = false;
-                btnReload.Enabled = false;
+                btnIniciarPartida.Image = Properties.Resources.iniciar_partida_disabled;
+                
+                btnJogador.Enabled = false;
+                btnJogador.Image = Properties.Resources.person_off;
+
                 btnReloadTurno.Enabled = false;
+                btnReloadTurno.Image = Properties.Resources.reload_off;
+
                 btnIniciarTimer.Enabled = true;
+                btnIniciarTimer.Image = Properties.Resources.iniciar_robo;
             } else
             {
                 btnIniciarTimer.Enabled = false;
+                btnIniciarTimer.Image = Properties.Resources.iniciar_robo_disabled;
+
+                btnJogador.Enabled = true;
+                btnJogador.Image = Properties.Resources.person_;
+
                 btnIniciarPartida.Enabled = true;
-                btnAdicionarJogador.Enabled = true;
-                btnReload.Enabled = true;
+                btnIniciarPartida.Image = Properties.Resources.iniciar_partida;
+
                 btnReloadTurno.Enabled = true;
+                btnReloadTurno.Image = Properties.Resources.reload_;
             }
         }
 
@@ -61,13 +74,13 @@ namespace MagicTrick
             Robo = null;
             List<Carta> cartas = Carta.ListarCartas(Id);
 
-            foreach (Jogador jogador in Jogadores)
+            for (int i = 0; i < Jogadores.Count; i++)
             {
-                foreach (Carta carta in jogador.Mao) {
+                foreach (Carta carta in Jogadores[i].Mao) {
                     Controls.Remove(carta.Panel);
                 }
 
-                jogador.AdicionarMao(cartas);
+                Jogadores[i].AdicionarMao(cartas, i);
             }
 
             MostrarMaos();
@@ -79,9 +92,12 @@ namespace MagicTrick
 
             if(!Turno.Mudou) { return; };
 
-            lblRodada.Text = $"{Turno.Rodada}";
-            lblAcao.Text = Turno.Acao == 'C' ? "Jogar" : "Apostar";
-            lblTurno.Text = Jogadores.Find(j => j.Id == Turno.Jogador).Nome;
+            if(!Turno.Acabou)
+            {
+                lblRodada.Text = $"{Turno.Rodada}";
+                lblAcao.Text = Turno.Acao == 'C' ? "Jogar" : "Apostar";
+                lblTurno.Text = Jogadores.Find(j => j.Id == Turno.Jogador).Nome;
+            }
 
             if(Turno.Resetou)
             {
@@ -215,11 +231,20 @@ namespace MagicTrick
             int espacamento = 8;
 
             int inicioTopo = indiceJogador == 0 ? 84 : this.Height - ((Carta.Height * 3) + 8);
-            int inicioEsquerda = ((this.Width - 200) / 2) - ((Carta.Width * metade) + (espacamento * (metade - 1))) / 2;
+            int inicioEsquerda = ((this.Width) / 2) - ((Carta.Width * metade) + (espacamento * (metade - 1))) / 2;
 
-            jogador.Label.Top = indiceJogador == 0 ? inicioTopo + (Carta.Height * 2) + espacamento + 20 : inicioTopo - 20 - espacamento;
-            jogador.Label.Left = inicioEsquerda;
-            this.Controls.Add(jogador.Label);
+            int topoLabel = indiceJogador == 0 ? 221 : 549;
+            jogador.LabelNome.Top = topoLabel;
+            jogador.LabelAposta.Top = topoLabel;
+            jogador.LabelPontuacao.Top = topoLabel;
+
+            jogador.LabelNome.Left = 334;
+            jogador.LabelAposta.Left = 436;
+            jogador.LabelPontuacao.Left = 584;
+
+            this.Controls.Add(jogador.LabelNome);
+            this.Controls.Add(jogador.LabelAposta);
+            this.Controls.Add(jogador.LabelPontuacao);
             
             for (int i = 0; i < mao.Count; i++)
             {
@@ -240,19 +265,28 @@ namespace MagicTrick
             int metade = tamanhoMao / 2;
             int espacamento = 8;
 
-            int inicioEsquerda = indiceJogador == 2 ? 20 : this.Width - ((Carta.Width * 3) + 20 + 200);
-            int inicioTopo = (this.Height / 2) - ((Carta.Height * metade) + (espacamento * (metade - 1))) / 2;
+            int inicioEsquerda = indiceJogador == 2 ? 20 : this.Width - ((Carta.Width * 3) + 40);
+            int inicioTopo = (this.Height / 2) - ((Carta.Width * metade) + (espacamento * (metade - 1))) / 2;
 
-            jogador.Label.Top = inicioTopo;
-            jogador.Label.Left = indiceJogador == 2 ? inicioEsquerda + (Carta.Width * 2) + espacamento + 12 : inicioEsquerda - 60 - espacamento;
-            this.Controls.Add(jogador.Label);
+            int esquerdaLabel = indiceJogador == 2 ? 17 : 840;
+            jogador.LabelNome.Left = esquerdaLabel;
+            jogador.LabelAposta.Left = esquerdaLabel;
+            jogador.LabelPontuacao.Left = esquerdaLabel;
+
+            jogador.LabelNome.Top = 562;
+            jogador.LabelAposta.Top = 586;
+            jogador.LabelPontuacao.Top = 610;
+
+            this.Controls.Add(jogador.LabelNome);
+            this.Controls.Add(jogador.LabelAposta);
+            this.Controls.Add(jogador.LabelPontuacao);
 
             for (int i = 0; i < mao.Count; i++)
             {
                 Carta carta = mao[i];
                 int posicao = (carta.Posicao - 1) % metade;
-                int topo = inicioTopo + (posicao * Carta.Height) + (posicao * espacamento);
-                int esquerda = (carta.Posicao - 1) < metade ? inicioEsquerda : (inicioEsquerda + Carta.Width + espacamento);
+                int topo = inicioTopo + (posicao * Carta.Width) + (posicao * espacamento);
+                int esquerda = (carta.Posicao - 1) < metade ? inicioEsquerda : (inicioEsquerda + Carta.Height + espacamento);
 
                 AdicionarCartaMesa(topo, esquerda, carta);
             }
@@ -277,7 +311,6 @@ namespace MagicTrick
 
             if(Robo == null)
             {
-                IdJogador = Convert.ToInt32(txtId.Text);
                 Robo = new Automato(Id, Turno.Rodada);
                 foreach (Jogador jogador in Jogadores)
                 {
@@ -298,16 +331,16 @@ namespace MagicTrick
                 Console.WriteLine("");
             }
 
-            if(IdJogador != Turno.Jogador)
+            if(IdJogadorControlado != Turno.Jogador)
             {
                 return;
             }
 
-            Jogador jogadorAtual = Jogadores.Find(j => j.Id == IdJogador);
+            Jogador jogadorAtual = Jogadores.Find(j => j.Id == IdJogadorControlado);
 
             if(jogadorAtual.Senha == null || jogadorAtual.Senha.Length == 0)
             {
-                jogadorAtual.Senha = txtSenha.Text;
+                jogadorAtual.Senha = SenhaJogadorControlado;
             }
 
             if(Turno.Acao == 'C')
@@ -325,7 +358,7 @@ namespace MagicTrick
 
         private void BtnIniciarTimer_Click(object sender, EventArgs e)
         {
-            if(txtId.Text == null || txtId.Text.Length == 0 || txtSenha.Text == null || txtSenha.Text.Length == 0)
+            if(IdJogadorControlado == null || SenhaJogadorControlado == null || SenhaJogadorControlado.Length == 0)
             {
                 GerenciadorDeRespostas.MostrarErro("ERRO: Primeiro preencha o ID e senha do jogador que será controlado pelo robo.");
                 return;
@@ -334,12 +367,12 @@ namespace MagicTrick
             if(tmrJogador.Enabled)
             {
                 tmrJogador.Enabled = false;
-                btnIniciarTimer.Text = "Iniciar Robo";
+                btnIniciarTimer.Image = Properties.Resources.iniciar_robo;
             }
             else
             {
                 tmrJogador.Enabled = true;
-                btnIniciarTimer.Text = "Pausar Robo";
+                btnIniciarTimer.Image = Properties.Resources.pausar_robo;
             }
         }
 
@@ -350,23 +383,21 @@ namespace MagicTrick
                 return;
             }
 
-            string id = txtId.Text;
-            string senha = txtSenha.Text;
-
-            if (id == "" || id == null)
+            if (IdJogadorControlado == null)
             {
                 GerenciadorDeRespostas.MostrarErro("ERRO: Preencha o ID do jogador primeiro");
                 return;
 
             }
 
-            if (senha == "" || senha == null)
+            if (SenhaJogadorControlado == "" || SenhaJogadorControlado == null)
             {
                 GerenciadorDeRespostas.MostrarErro("ERRO: Preencha a senha do jogador primeiro");
                 return;
             }
 
-            string resultadoIniciarPartida = Jogo.IniciarPartida(Convert.ToInt32(id), senha);
+            CarregarJogadores();
+            string resultadoIniciarPartida = Jogo.IniciarPartida(IdJogadorControlado, SenhaJogadorControlado);
 
             if (GerenciadorDeRespostas.PossuiErro(resultadoIniciarPartida))
             {
@@ -377,53 +408,20 @@ namespace MagicTrick
             CarregarPartida();
         }
 
-        private void dgvJogadores_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var jogador = dgvJogadores.SelectedRows[0];
-
-            if (jogador != null)
-            {
-                Jogador carregar = (Jogador)jogador.DataBoundItem;
-                txtId.Text = Convert.ToString(carregar.Id);
-                txtNome.Text = carregar.Nome;
-            }
-        }
-
-        private void btnAdicionarJogador_Click(object sender, EventArgs e)
-        {
-            string nome = txtNome.Text;
-
-            if (nome == "" || nome == null)
-            {
-                GerenciadorDeRespostas.MostrarErro("ERRO: Preencha o nome do jogador primeiro");
-                return;
-
-            }
-
-            string resultado = Jogo.EntrarPartida(Id, nome, Senha);
-
-            if (GerenciadorDeRespostas.PossuiErro(resultado))
-            {
-                GerenciadorDeRespostas.MostrarErro(resultado);
-                return;
-            }
-
-
-            string[] dadosJogador = resultado.Split(',');
-            txtId.Text = dadosJogador[0];
-            txtSenha.Text = dadosJogador[1];
-
-            CarregarJogadores();
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            CarregarJogadores();
-        }
-
         private void btnReloadTurno_Click(object sender, EventArgs e)
         {
             CarregarPartida();
+        }
+
+        private void btnJogador_Click(object sender, EventArgs e)
+        {
+            frmSelecaoJogador frm = new frmSelecaoJogador(Id, Senha);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Jogadores = frm.ListaJogadores;
+                IdJogadorControlado = frm.Id;
+                SenhaJogadorControlado = frm.Senha;
+            }
         }
     }
 }
